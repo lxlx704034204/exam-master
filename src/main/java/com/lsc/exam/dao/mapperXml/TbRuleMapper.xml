@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsc.exam.dao.mapper.TbRuleMapper">
+  <resultMap id="BaseResultMap" type="com.lsc.exam.dao.model.TbRule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="taotiId" jdbcType="INTEGER" property="taotiid" />
+    <result column="totalMark" jdbcType="INTEGER" property="totalmark" />
+    <result column="difficulty" jdbcType="DOUBLE" property="difficulty" />
+    <result column="singleNum" jdbcType="INTEGER" property="singlenum" />
+    <result column="singleScore" jdbcType="INTEGER" property="singlescore" />
+    <result column="multipleScore" jdbcType="INTEGER" property="multiplescore" />
+    <result column="multipleNum" jdbcType="INTEGER" property="multiplenum" />
+    <result column="completeNum" jdbcType="INTEGER" property="completenum" />
+    <result column="completeScore" jdbcType="INTEGER" property="completescore" />
+    <result column="CalculationNum" jdbcType="INTEGER" property="calculationnum" />
+    <result column="CalculationScore" jdbcType="INTEGER" property="calculationscore" />
+    <result column="subjectiveNum" jdbcType="INTEGER" property="subjectivenum" />
+    <result column="subjectiveScore" jdbcType="INTEGER" property="subjectivescore" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="ruleName" jdbcType="VARCHAR" property="rulename" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsc.exam.dao.model.TbRule">
+    <result column="pointIds" jdbcType="LONGVARCHAR" property="pointids" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, taotiId, totalMark, difficulty, singleNum, singleScore, multipleScore, multipleNum, 
+    completeNum, completeScore, CalculationNum, CalculationScore, subjectiveNum, subjectiveScore, 
+    createTime, status, ruleName
+  </sql>
+  <sql id="Blob_Column_List">
+    pointIds
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lsc.exam.dao.model.TbRuleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lsc.exam.dao.model.TbRuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_rule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsc.exam.dao.model.TbRuleExample">
+    delete from tb_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsc.exam.dao.model.TbRule">
+    insert into tb_rule (id, taotiId, totalMark, 
+      difficulty, singleNum, singleScore, 
+      multipleScore, multipleNum, completeNum, 
+      completeScore, CalculationNum, CalculationScore, 
+      subjectiveNum, subjectiveScore, createTime, 
+      status, ruleName, pointIds
+      )
+    values (#{id,jdbcType=INTEGER}, #{taotiid,jdbcType=INTEGER}, #{totalmark,jdbcType=INTEGER}, 
+      #{difficulty,jdbcType=DOUBLE}, #{singlenum,jdbcType=INTEGER}, #{singlescore,jdbcType=INTEGER}, 
+      #{multiplescore,jdbcType=INTEGER}, #{multiplenum,jdbcType=INTEGER}, #{completenum,jdbcType=INTEGER}, 
+      #{completescore,jdbcType=INTEGER}, #{calculationnum,jdbcType=INTEGER}, #{calculationscore,jdbcType=INTEGER}, 
+      #{subjectivenum,jdbcType=INTEGER}, #{subjectivescore,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{rulename,jdbcType=VARCHAR}, #{pointids,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsc.exam.dao.model.TbRule">
+    insert into tb_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="taotiid != null">
+        taotiId,
+      </if>
+      <if test="totalmark != null">
+        totalMark,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="singlenum != null">
+        singleNum,
+      </if>
+      <if test="singlescore != null">
+        singleScore,
+      </if>
+      <if test="multiplescore != null">
+        multipleScore,
+      </if>
+      <if test="multiplenum != null">
+        multipleNum,
+      </if>
+      <if test="completenum != null">
+        completeNum,
+      </if>
+      <if test="completescore != null">
+        completeScore,
+      </if>
+      <if test="calculationnum != null">
+        CalculationNum,
+      </if>
+      <if test="calculationscore != null">
+        CalculationScore,
+      </if>
+      <if test="subjectivenum != null">
+        subjectiveNum,
+      </if>
+      <if test="subjectivescore != null">
+        subjectiveScore,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="rulename != null">
+        ruleName,
+      </if>
+      <if test="pointids != null">
+        pointIds,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taotiid != null">
+        #{taotiid,jdbcType=INTEGER},
+      </if>
+      <if test="totalmark != null">
+        #{totalmark,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="singlenum != null">
+        #{singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="singlescore != null">
+        #{singlescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplescore != null">
+        #{multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplenum != null">
+        #{multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="completenum != null">
+        #{completenum,jdbcType=INTEGER},
+      </if>
+      <if test="completescore != null">
+        #{completescore,jdbcType=INTEGER},
+      </if>
+      <if test="calculationnum != null">
+        #{calculationnum,jdbcType=INTEGER},
+      </if>
+      <if test="calculationscore != null">
+        #{calculationscore,jdbcType=INTEGER},
+      </if>
+      <if test="subjectivenum != null">
+        #{subjectivenum,jdbcType=INTEGER},
+      </if>
+      <if test="subjectivescore != null">
+        #{subjectivescore,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="rulename != null">
+        #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="pointids != null">
+        #{pointids,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsc.exam.dao.model.TbRuleExample" resultType="java.lang.Long">
+    select count(*) from tb_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_rule
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taotiid != null">
+        taotiId = #{record.taotiid,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalmark != null">
+        totalMark = #{record.totalmark,jdbcType=INTEGER},
+      </if>
+      <if test="record.difficulty != null">
+        difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="record.singlenum != null">
+        singleNum = #{record.singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.singlescore != null">
+        singleScore = #{record.singlescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.multiplescore != null">
+        multipleScore = #{record.multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.multiplenum != null">
+        multipleNum = #{record.multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.completenum != null">
+        completeNum = #{record.completenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.completescore != null">
+        completeScore = #{record.completescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.calculationnum != null">
+        CalculationNum = #{record.calculationnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.calculationscore != null">
+        CalculationScore = #{record.calculationscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectivenum != null">
+        subjectiveNum = #{record.subjectivenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectivescore != null">
+        subjectiveScore = #{record.subjectivescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.rulename != null">
+        ruleName = #{record.rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pointids != null">
+        pointIds = #{record.pointids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_rule
+    set id = #{record.id,jdbcType=INTEGER},
+      taotiId = #{record.taotiid,jdbcType=INTEGER},
+      totalMark = #{record.totalmark,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      singleNum = #{record.singlenum,jdbcType=INTEGER},
+      singleScore = #{record.singlescore,jdbcType=INTEGER},
+      multipleScore = #{record.multiplescore,jdbcType=INTEGER},
+      multipleNum = #{record.multiplenum,jdbcType=INTEGER},
+      completeNum = #{record.completenum,jdbcType=INTEGER},
+      completeScore = #{record.completescore,jdbcType=INTEGER},
+      CalculationNum = #{record.calculationnum,jdbcType=INTEGER},
+      CalculationScore = #{record.calculationscore,jdbcType=INTEGER},
+      subjectiveNum = #{record.subjectivenum,jdbcType=INTEGER},
+      subjectiveScore = #{record.subjectivescore,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      ruleName = #{record.rulename,jdbcType=VARCHAR},
+      pointIds = #{record.pointids,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_rule
+    set id = #{record.id,jdbcType=INTEGER},
+      taotiId = #{record.taotiid,jdbcType=INTEGER},
+      totalMark = #{record.totalmark,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      singleNum = #{record.singlenum,jdbcType=INTEGER},
+      singleScore = #{record.singlescore,jdbcType=INTEGER},
+      multipleScore = #{record.multiplescore,jdbcType=INTEGER},
+      multipleNum = #{record.multiplenum,jdbcType=INTEGER},
+      completeNum = #{record.completenum,jdbcType=INTEGER},
+      completeScore = #{record.completescore,jdbcType=INTEGER},
+      CalculationNum = #{record.calculationnum,jdbcType=INTEGER},
+      CalculationScore = #{record.calculationscore,jdbcType=INTEGER},
+      subjectiveNum = #{record.subjectivenum,jdbcType=INTEGER},
+      subjectiveScore = #{record.subjectivescore,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      ruleName = #{record.rulename,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsc.exam.dao.model.TbRule">
+    update tb_rule
+    <set>
+      <if test="taotiid != null">
+        taotiId = #{taotiid,jdbcType=INTEGER},
+      </if>
+      <if test="totalmark != null">
+        totalMark = #{totalmark,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="singlenum != null">
+        singleNum = #{singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="singlescore != null">
+        singleScore = #{singlescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplescore != null">
+        multipleScore = #{multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplenum != null">
+        multipleNum = #{multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="completenum != null">
+        completeNum = #{completenum,jdbcType=INTEGER},
+      </if>
+      <if test="completescore != null">
+        completeScore = #{completescore,jdbcType=INTEGER},
+      </if>
+      <if test="calculationnum != null">
+        CalculationNum = #{calculationnum,jdbcType=INTEGER},
+      </if>
+      <if test="calculationscore != null">
+        CalculationScore = #{calculationscore,jdbcType=INTEGER},
+      </if>
+      <if test="subjectivenum != null">
+        subjectiveNum = #{subjectivenum,jdbcType=INTEGER},
+      </if>
+      <if test="subjectivescore != null">
+        subjectiveScore = #{subjectivescore,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="rulename != null">
+        ruleName = #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="pointids != null">
+        pointIds = #{pointids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsc.exam.dao.model.TbRule">
+    update tb_rule
+    set taotiId = #{taotiid,jdbcType=INTEGER},
+      totalMark = #{totalmark,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      singleNum = #{singlenum,jdbcType=INTEGER},
+      singleScore = #{singlescore,jdbcType=INTEGER},
+      multipleScore = #{multiplescore,jdbcType=INTEGER},
+      multipleNum = #{multiplenum,jdbcType=INTEGER},
+      completeNum = #{completenum,jdbcType=INTEGER},
+      completeScore = #{completescore,jdbcType=INTEGER},
+      CalculationNum = #{calculationnum,jdbcType=INTEGER},
+      CalculationScore = #{calculationscore,jdbcType=INTEGER},
+      subjectiveNum = #{subjectivenum,jdbcType=INTEGER},
+      subjectiveScore = #{subjectivescore,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      ruleName = #{rulename,jdbcType=VARCHAR},
+      pointIds = #{pointids,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsc.exam.dao.model.TbRule">
+    update tb_rule
+    set taotiId = #{taotiid,jdbcType=INTEGER},
+      totalMark = #{totalmark,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      singleNum = #{singlenum,jdbcType=INTEGER},
+      singleScore = #{singlescore,jdbcType=INTEGER},
+      multipleScore = #{multiplescore,jdbcType=INTEGER},
+      multipleNum = #{multiplenum,jdbcType=INTEGER},
+      completeNum = #{completenum,jdbcType=INTEGER},
+      completeScore = #{completescore,jdbcType=INTEGER},
+      CalculationNum = #{calculationnum,jdbcType=INTEGER},
+      CalculationScore = #{calculationscore,jdbcType=INTEGER},
+      subjectiveNum = #{subjectivenum,jdbcType=INTEGER},
+      subjectiveScore = #{subjectivescore,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      ruleName = #{rulename,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

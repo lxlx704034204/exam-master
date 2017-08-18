@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsc.exam.dao.mapper.TbExamResultMapper">
+  <resultMap id="BaseResultMap" type="com.lsc.exam.dao.model.TbExamResult">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="questionId" jdbcType="INTEGER" property="questionid" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="studentId" jdbcType="VARCHAR" property="studentid" />
+    <result column="studentName" jdbcType="VARCHAR" property="studentname" />
+    <result column="teachId" jdbcType="VARCHAR" property="teachid" />
+    <result column="teachName" jdbcType="VARCHAR" property="teachname" />
+    <result column="taotiId" jdbcType="INTEGER" property="taotiid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, questionId, answer, score, studentId, studentName, teachId, teachName, taotiId
+  </sql>
+  <select id="selectByExample" parameterType="com.lsc.exam.dao.model.TbExamResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_exam_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_exam_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_exam_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsc.exam.dao.model.TbExamResultExample">
+    delete from tb_exam_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsc.exam.dao.model.TbExamResult">
+    insert into tb_exam_result (id, questionId, answer, 
+      score, studentId, studentName, 
+      teachId, teachName, taotiId
+      )
+    values (#{id,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, #{answer,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{studentid,jdbcType=VARCHAR}, #{studentname,jdbcType=VARCHAR}, 
+      #{teachid,jdbcType=VARCHAR}, #{teachname,jdbcType=VARCHAR}, #{taotiid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsc.exam.dao.model.TbExamResult">
+    insert into tb_exam_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionid != null">
+        questionId,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="studentid != null">
+        studentId,
+      </if>
+      <if test="studentname != null">
+        studentName,
+      </if>
+      <if test="teachid != null">
+        teachId,
+      </if>
+      <if test="teachname != null">
+        teachName,
+      </if>
+      <if test="taotiid != null">
+        taotiId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null">
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null">
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="teachid != null">
+        #{teachid,jdbcType=VARCHAR},
+      </if>
+      <if test="teachname != null">
+        #{teachname,jdbcType=VARCHAR},
+      </if>
+      <if test="taotiid != null">
+        #{taotiid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsc.exam.dao.model.TbExamResultExample" resultType="java.lang.Long">
+    select count(*) from tb_exam_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_exam_result
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionid != null">
+        questionId = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.answer != null">
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentid != null">
+        studentId = #{record.studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentname != null">
+        studentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachid != null">
+        teachId = #{record.teachid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachname != null">
+        teachName = #{record.teachname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taotiid != null">
+        taotiId = #{record.taotiid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_exam_result
+    set id = #{record.id,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      studentId = #{record.studentid,jdbcType=VARCHAR},
+      studentName = #{record.studentname,jdbcType=VARCHAR},
+      teachId = #{record.teachid,jdbcType=VARCHAR},
+      teachName = #{record.teachname,jdbcType=VARCHAR},
+      taotiId = #{record.taotiid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsc.exam.dao.model.TbExamResult">
+    update tb_exam_result
+    <set>
+      <if test="questionid != null">
+        questionId = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null">
+        studentId = #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null">
+        studentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="teachid != null">
+        teachId = #{teachid,jdbcType=VARCHAR},
+      </if>
+      <if test="teachname != null">
+        teachName = #{teachname,jdbcType=VARCHAR},
+      </if>
+      <if test="taotiid != null">
+        taotiId = #{taotiid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsc.exam.dao.model.TbExamResult">
+    update tb_exam_result
+    set questionId = #{questionid,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      studentId = #{studentid,jdbcType=VARCHAR},
+      studentName = #{studentname,jdbcType=VARCHAR},
+      teachId = #{teachid,jdbcType=VARCHAR},
+      teachName = #{teachname,jdbcType=VARCHAR},
+      taotiId = #{taotiid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

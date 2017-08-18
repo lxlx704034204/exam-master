@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>H+ 后台主题UI框架 - 团队管理</title>
+<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row"
+			style="border-bottom-width: 1px; border-bottom-style: solid">
+			<div class="col-sm-3" style="float: left">
+				<div class="input-group" style="margin-bottom: 5px">
+					<button type="button" class="btn btn-sm btn-primary" id="add">
+						添加题目</button>
+				</div>
+			</div>
+			<div class="col-sm-3" style="float: right; margin-bottom: 5px">
+				<div class="input-group">
+					<input type="text" placeholder="请输入关键词"
+						class="input-sm form-control"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-sm btn-primary">搜索</button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row"id="body">
+			<!-- <div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>题目详情</span> <span style="margin-left: 6px">难度：1</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+
+					</div>
+					<div class="ibox-content" style="height: 250px; overflow-y: auto;">
+						<p>世界那么大你想去哪里走走？</p>
+						<div>
+							<p>A.美国</p>
+							<p>B.中华人民共和国</p>
+							<p>C.澳大利亚</p>
+							<p>D.美利坚合众国</p>
+						</div>
+						<p>答案：E</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>答案：Y</span> <span style="margin-left: 6px">难度：1</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+					</div>
+					<div class="ibox-content">
+						<p>深圳市龙岗区坂田街道永香路五巷八号704最胖的人是欧阳吗？</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>题目详情</span> <span style="margin-left: 6px">难度：1</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+					</div>
+					<div class="ibox-content">
+						<p>请结合古今中外各种学科以及各种信仰再加上各种动植物的比较，证明Y-master长的很帅。</p>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>答案：lol</span> <span style="margin-left: 6px">难度：0.5</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+					</div>
+					<div class="ibox-content">
+						<p>他们经常玩的游戏是_____.</p>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>题目详情</span> <span style="margin-left: 6px">难度：0.8</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+					</div>
+					<div class="ibox-content">
+						<p>计算1+x=2.</p>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>题目详情</span> <span style="margin-left: 6px">难度：1</span> <a
+							href="#"><span class="label label-primary pull-right">删除</span></a>
+						<a href="#"><span class="label label-primary pull-right">修改</span></a>
+					</div>
+					<div class="ibox-content">
+						<p>这是一道附加题。</p>
+
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<div class="ibg" id="div">
+		<div class="idiv" id="iDiv">
+			<div class="ifont">
+				添加新题目
+				<div>
+					<textarea  placeholder="请输入题目"id="stem"
+					style="margin: 6px auto; width: 86%;resize:none;overflow-x:none "></textarea>
+					
+					
+					<div style="margin:6px auto;"id="choice">
+						<div>
+						<input type="text"style=" width: 86%;margin-top:3px" placeholder="请输入选项A"id="choice1">
+						<input type="text"style=" width: 86%;margin-top:3px" placeholder="请输入选项B"id="choice2">
+						<input type="text"style=" width: 86%;margin-top:3px" placeholder="请输入选项C"id="choice3">
+						<input type="text"style=" width: 86%;margin-top:3px" placeholder="请输入选项D"id="choice4">
+						</div>
+					</div>
+					<div>
+					<input type="text"style="margin:6px auto ; width: 86%;" placeholder="请输入难度系数0.3~1"id="difficulty">
+					</div>
+					<textarea  placeholder="请输入答案" id="answer"
+					style="margin: 6px auto; width: 86%;resize:none overflow-x:none"></textarea>
+					<div class="input-group" style="margin: 15px auto;">
+						<button type="button" class="btn btn-sm btn-primary"id="addquestion">确定</button>
+						<button style="margin-left: 30px" type="button"
+							class="btn btn-sm btn-primary" id="qx">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+			<script src="js/jquery.min.js?v=2.1.4"></script>
+			<script src="js/bootstrap.min.js?v=3.3.5"></script>
+			<!-- <script src="js/content.min.js?v=1.0.0"></script> -->
+			<script>
+			var flag = getQueryString("flag");
+			var pointid = getQueryString("pointid");
+        $(document).ready(function(){
+			$("#add").click(function(){
+				$("#div").show();
+				if(flag=="1"||flag=="2"){
+					
+				}else{
+					$("#choice").hide();
+				}
+			});
+			$("#qx").click(function(){
+				$("#div").hide();
+			});
+			$("#addquestion").click(function(){
+				var stem = $("#stem").val();
+				var answer = $("#answer").val();
+				var difficulty = $("#difficulty").val();
+				var parm={stem:stem,answer:answer,difficulty:difficulty,
+						  pointid:pointid,type:flag};
+				if(flag=="1"||flag=="2"){
+					var choice1 = $("#choice1").val();
+					var choice2 = $("#choice2").val();
+					var choice3 = $("#choice3").val();
+					var choice4 = $("#choice4").val();
+					parm["choice1"]=choice1;
+					parm["choice2"]=choice2;
+					parm["choice3"]=choice3;
+					parm["choice4"]=choice4;
+				}
+			
+				 var url = domain+"question/insertquestion";
+				$.post(url,parm,function(data){
+					if(data.code=="1"){
+						$("#div").hide();
+						location.reload();	
+					} 
+					
+				});
+			});
+			showPage(1);
+		});
+        function showPage(page){
+			var parm ={type:flag,pointid:pointid};
+			var url = domain +"question/queryquestion";
+			$.post(url,parm,function(data){
+				var htmls=[];
+				for(var i in data.data){
+					if(flag=="1"||flag=="2"){
+					var html ='<div class="col-sm-4">'
+							 +	'	<div class="ibox">'
+							 +	'		<div class="ibox-title">'
+							 +	'		<span>题目详情</span> <span style="margin-left: 6px">难度：'+data.data[i].difficulty+'</span>' 
+							 +	'		<a href="javascript:void(0)" onclick="del(this)" data-id='+data.data[i].id+'><span class="label label-primary pull-right">删除</span></a>'
+							 +	'		<a href="#"><span class="label label-primary pull-right">修改</span></a>'
+							 +	'		</div>'
+							 +	'	<div class="ibox-content" style="height: 250px; overflow-y: auto;">'
+							 +	'		<p>'+data.data[i].stem+'</p>'
+							 +	'	<div>'
+							 +	'		<p>A.'+data.data[i].choice1+'</p>'
+							 +	'	    <p>B.'+data.data[i].choice2+'</p>'
+							 +	'		<p>C.'+data.data[i].choice3+'</p>'
+							 +	'		<p>D.'+data.data[i].choice4+'</p>'
+							 +	'	</div>'
+							 +	'	<p>答案：'+data.data[i].answer+'</p>'
+							 +	'	</div>'
+							 +	'</div>'
+							 +'</div>';
+					}else{
+						var html ='<div class="col-sm-4">'
+							 +	'	<div class="ibox">'
+							 +	'		<div class="ibox-title">'
+							 +	'		<span>题目详情</span> <span style="margin-left: 6px">难度：'+data.data[i].difficulty+'</span>' 
+							 +	'		<a href="javascript:void(0)" onclick="del(this)" data-id='+data.data[i].id+'><span class="label label-primary pull-right">删除</span></a>'
+							 +	'		<a href="#"><span class="label label-primary pull-right">修改</span></a>'
+							 +	'		</div>'
+							 +	'	<div class="ibox-content" style="height: 250px; overflow-y: auto;">'
+							 +	'		<p>'+data.data[i].stem+'</p>'
+							 +	'	<p>答案：'+data.data[i].answer+'</p>'
+							 +	'	</div>'
+							 +	'</div>'
+							 +'</div>';
+					}
+	         		htmls.push(html);
+				}
+				$("#body").append(htmls.join());
+			});
+		}
+        function getQueryString(name) {  
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+		    var r = location.search.substr(1).match(reg);  
+		    if (r != null) return unescape(decodeURI(r[2])); return null;  
+		}
+		function del(obj){
+			if(confirm("确定删除？")){
+				var id = $(obj).attr("data-id");
+				var parm={id:id};
+				var url=domain +"question/removequestion";
+				 $.post(url,parm,function(data){
+					if(data.code=="1"){
+						$(obj).parent().parent().parent().remove();
+					}
+				});
+			}
+			
+		}
+    </script>
+			<script type="text/javascript"
+				src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>

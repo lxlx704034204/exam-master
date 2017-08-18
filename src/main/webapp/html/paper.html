@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>试卷</title>
+<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+	<div class="ifixed" id="timeshow">
+		<div style="margin-top: 5px">
+		<span>考试剩余时间:</span>
+		<span id="timer">119分钟59秒</span>
+		</div>
+	</div>
+		<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row"
+			style="border-bottom-width: 1px; border-bottom-style: solid">
+			<div class="col-sm-3" style="float: left">
+				<div class="input-group" style="margin-bottom: 5px">
+					<button type="button" class="btn btn-sm btn-primary" id="admit">
+						点击交卷</button>
+				</div>
+			</div>
+				
+			
+		</div>
+		<div class="row"id="body">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>单项选择</span> <span style="margin-left: 16px">总分：20</span>
+						<span style="margin-left: 16px">答案示例：A</span>
+					</div>
+					<div class="ibox-content" style="height: 250px; overflow-y: auto;">
+						<div style="width: 80%;overflow-x:visible">
+						<p>世界那么大你想去哪里走走？</p>
+							<p>A.美国</p>
+							<p>B.中华人民共和国</p>
+							<p>C.澳大利亚</p>
+							<p>D.美利坚合众国</p>
+						</div>
+						<p>答案：<input type="text"style="width: 60px"></p>
+					</div>
+					<div class="ibox-content" style="height: 250px; overflow-y: auto;">
+						<div style="width: 80%;overflow-x:visible">
+						<p>世界那么大你想去哪里走走？</p>
+							<p><input type="radio">A.美国</p>
+							<p>B.中华人民共和国</p>
+							<p>C.澳大利亚</p>
+							<p>D.美利坚合众国</p>
+						</div>
+						<p>答案：<input type="text"style="width: 60px"></p>
+					</div>	
+				</div>
+			</div>
+				<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>多项选择</span> <span style="margin-left: 16px">总分：20</span>
+						<span style="margin-left: 16px">答案示例：ABC</span>
+					</div>
+					<div class="ibox-content" >
+						<div style="width: 80%;overflow-x:visible">
+						<p>世界那么大你想去哪里走走？</p>
+							<p>A.美国</p>
+							<p>B.中华人民共和国</p>
+							<p>C.澳大利亚</p>
+							<p>D.美利坚合众国</p>
+						<p>答案：<input type="text"style="width: 60px"></p>
+						</div>
+					</div>
+					<div class="ibox-content" >
+						<div style="width: 80%;overflow-x:visible">
+						<p>世界那么大你想去哪里走走？</p>
+							<p><input type="radio">A.美国</p>
+							<p>B.中华人民共和国</p>
+							<p>C.澳大利亚</p>
+							<p>D.美利坚合众国</p>
+						<p>答案：<input type="text"style="width: 60px"></p>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>填空题</span> <span style="margin-left: 16px">总分：20</span>
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>他们经常玩的游戏是_____.</p>
+						<p>答案：<input type="text"style="width: 120px"></p>
+						</div>
+
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>他们经常玩的游戏是_____.</p>
+						<p>答案：<input type="text"style="width: 200px"></p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>计算题</span> <span style="margin-left: 16px">总分：20</span>
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>深圳市龙岗区坂田街道永香路五巷八号704最胖的人是欧阳吗？</p>
+						<p><textarea  placeholder="请输入答案" id="answer"
+					style="margin: 6px auto; width: 60%;resize:none overflow-x:none"rows="6"></textarea></p>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>深圳市龙岗区坂田街道永香路五巷八号704最胖的人是欧阳吗？</p>
+						<p><textarea  placeholder="请输入答案" id="answer"
+					style="margin: 6px auto; width: 60%;resize:none overflow-x:none"rows="6"></textarea></p>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<span>主观题</span> <span style="margin-left: 16px">总分：20</span>
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>深圳市龙岗区坂田街道永香路五巷八号704最胖的人是欧阳吗？</p>
+						<p><textarea  placeholder="请输入答案" id="answer"
+					style="margin: 6px auto; width: 60%;resize:none overflow-x:none"rows="6"></textarea></p>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div style="width: 80%;overflow-x:visible">
+						<p>深圳市龙岗区坂田街道永香路五巷八号704最胖的人是欧阳吗？</p>
+						<p><textarea  placeholder="请输入答案" id="answer"
+					style="margin: 6px auto; width: 60%;resize:none overflow-x:none"rows="6"></textarea></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+			<script src="js/jquery.min.js?v=2.1.4"></script>
+			<script src="js/bootstrap.min.js?v=3.3.5"></script>
+			<!-- <script src="js/content.min.js?v=1.0.0"></script> -->
+			<script type="text/javascript">
+				var min = 10;
+				var sec = 1;
+				$(function(){
+					setInterval("ls()", 1000);
+					$("#admit").click(function(){
+						alert("交卷");
+					});
+				});
+				function ls(){
+					
+					min --;
+					if(min==-1 && sec>0){
+						sec--;
+						min=9;
+					} else if(min==0 && sec==0){
+						$("#timeshow").hide();
+						$("#admit").click();
+						
+					}
+					$("#timer").text(sec+"分钟"+min+"秒");
+					
+				}
+			</script>
+			<script type="text/javascript"
+				src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsc.exam.dao.mapper.TbQuestionsMapper">
+  <resultMap id="BaseResultMap" type="com.lsc.exam.dao.model.TbQuestions">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="difficulty" jdbcType="DOUBLE" property="difficulty" />
+    <result column="pointId" jdbcType="VARCHAR" property="pointid" />
+    <result column="choice1" jdbcType="VARCHAR" property="choice1" />
+    <result column="choice2" jdbcType="VARCHAR" property="choice2" />
+    <result column="choice3" jdbcType="VARCHAR" property="choice3" />
+    <result column="choice4" jdbcType="VARCHAR" property="choice4" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="knowledgeName" jdbcType="VARCHAR" property="knowledgename" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="lessonid" jdbcType="INTEGER" property="lessonid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsc.exam.dao.model.TbQuestions">
+    <result column="stem" jdbcType="LONGVARCHAR" property="stem" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, type, difficulty, pointId, choice1, choice2, choice3, choice4, answer, userId, 
+    createTime, userName, knowledgeName, score, status, lessonid
+  </sql>
+  <sql id="Blob_Column_List">
+    stem
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lsc.exam.dao.model.TbQuestionsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lsc.exam.dao.model.TbQuestionsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_questions
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_questions
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsc.exam.dao.model.TbQuestionsExample">
+    delete from tb_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsc.exam.dao.model.TbQuestions">
+    insert into tb_questions (id, type, difficulty, 
+      pointId, choice1, choice2, 
+      choice3, choice4, answer, 
+      userId, createTime, userName, 
+      knowledgeName, score, status, 
+      lessonid, stem)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{difficulty,jdbcType=DOUBLE}, 
+      #{pointid,jdbcType=VARCHAR}, #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, 
+      #{choice3,jdbcType=VARCHAR}, #{choice4,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
+      #{knowledgename,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{lessonid,jdbcType=INTEGER}, #{stem,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsc.exam.dao.model.TbQuestions">
+    insert into tb_questions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="pointid != null">
+        pointId,
+      </if>
+      <if test="choice1 != null">
+        choice1,
+      </if>
+      <if test="choice2 != null">
+        choice2,
+      </if>
+      <if test="choice3 != null">
+        choice3,
+      </if>
+      <if test="choice4 != null">
+        choice4,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="knowledgename != null">
+        knowledgeName,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="lessonid != null">
+        lessonid,
+      </if>
+      <if test="stem != null">
+        stem,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="pointid != null">
+        #{pointid,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null">
+        #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null">
+        #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null">
+        #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null">
+        #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="knowledgename != null">
+        #{knowledgename,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null">
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="stem != null">
+        #{stem,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsc.exam.dao.model.TbQuestionsExample" resultType="java.lang.Long">
+    select count(*) from tb_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_questions
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.difficulty != null">
+        difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pointid != null">
+        pointId = #{record.pointid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice1 != null">
+        choice1 = #{record.choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice2 != null">
+        choice2 = #{record.choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice3 != null">
+        choice3 = #{record.choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choice4 != null">
+        choice4 = #{record.choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null">
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.knowledgename != null">
+        knowledgeName = #{record.knowledgename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null">
+        lessonid = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stem != null">
+        stem = #{record.stem,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_questions
+    set id = #{record.id,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      pointId = #{record.pointid,jdbcType=VARCHAR},
+      choice1 = #{record.choice1,jdbcType=VARCHAR},
+      choice2 = #{record.choice2,jdbcType=VARCHAR},
+      choice3 = #{record.choice3,jdbcType=VARCHAR},
+      choice4 = #{record.choice4,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      userName = #{record.username,jdbcType=VARCHAR},
+      knowledgeName = #{record.knowledgename,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      lessonid = #{record.lessonid,jdbcType=INTEGER},
+      stem = #{record.stem,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_questions
+    set id = #{record.id,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=DOUBLE},
+      pointId = #{record.pointid,jdbcType=VARCHAR},
+      choice1 = #{record.choice1,jdbcType=VARCHAR},
+      choice2 = #{record.choice2,jdbcType=VARCHAR},
+      choice3 = #{record.choice3,jdbcType=VARCHAR},
+      choice4 = #{record.choice4,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      userName = #{record.username,jdbcType=VARCHAR},
+      knowledgeName = #{record.knowledgename,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      lessonid = #{record.lessonid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsc.exam.dao.model.TbQuestions">
+    update tb_questions
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="pointid != null">
+        pointId = #{pointid,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null">
+        choice1 = #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null">
+        choice2 = #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null">
+        choice3 = #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null">
+        choice4 = #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="knowledgename != null">
+        knowledgeName = #{knowledgename,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null">
+        lessonid = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="stem != null">
+        stem = #{stem,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsc.exam.dao.model.TbQuestions">
+    update tb_questions
+    set type = #{type,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      pointId = #{pointid,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      userName = #{username,jdbcType=VARCHAR},
+      knowledgeName = #{knowledgename,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      lessonid = #{lessonid,jdbcType=INTEGER},
+      stem = #{stem,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsc.exam.dao.model.TbQuestions">
+    update tb_questions
+    set type = #{type,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      pointId = #{pointid,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      userName = #{username,jdbcType=VARCHAR},
+      knowledgeName = #{knowledgename,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      lessonid = #{lessonid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsc.exam.dao.mapper.TbChapterMapper">
+  <resultMap id="BaseResultMap" type="com.lsc.exam.dao.model.TbChapter">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="lessonId" jdbcType="INTEGER" property="lessonid" />
+    <result column="chapterName" jdbcType="VARCHAR" property="chaptername" />
+      <result column="joinTime" jdbcType="TIMESTAMP" property="jointime" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, lessonId, chapterName, joinTime, Status
+  </sql>
+  <select id="selectByExample" parameterType="com.lsc.exam.dao.model.TbChapterExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_chapter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_chapter
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_chapter
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsc.exam.dao.model.TbChapterExample">
+    delete from tb_chapter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsc.exam.dao.model.TbChapter">
+    insert into tb_chapter (ID, lessonId, chapterName, 
+      joinTime, Status)
+    values (#{id,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, #{chaptername,jdbcType=VARCHAR}, 
+      #{jointime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsc.exam.dao.model.TbChapter">
+    insert into tb_chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="lessonid != null">
+        lessonId,
+      </if>
+      <if test="chaptername != null">
+        chapterName,
+      </if>
+      <if test="jointime != null">
+        joinTime,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null">
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="chaptername != null">
+        #{chaptername,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null">
+        #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsc.exam.dao.model.TbChapterExample" resultType="java.lang.Long">
+    select count(*) from tb_chapter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_chapter
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null">
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.chaptername != null">
+        chapterName = #{record.chaptername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jointime != null">
+        joinTime = #{record.jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_chapter
+    set ID = #{record.id,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      chapterName = #{record.chaptername,jdbcType=VARCHAR},
+      joinTime = #{record.jointime,jdbcType=TIMESTAMP},
+      Status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsc.exam.dao.model.TbChapter">
+    update tb_chapter
+    <set>
+      <if test="lessonid != null">
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="chaptername != null">
+        chapterName = #{chaptername,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null">
+        joinTime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsc.exam.dao.model.TbChapter">
+    update tb_chapter
+    set lessonId = #{lessonid,jdbcType=INTEGER},
+      chapterName = #{chaptername,jdbcType=VARCHAR},
+      joinTime = #{jointime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

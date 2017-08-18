@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>考试系统- 登录</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="html/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="html/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+
+    <link href="html/css/animate.min.css" rel="stylesheet">
+    <link href="html/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <!--<h1 class="logo-name">H+</h1>-->
+				<img class="log-img" src="html/img/log.png">
+            <h3 style="margin-top: 40px">欢迎使用在线考试系统</h3>
+            </div>
+
+            <form class="m-t" role="form">
+                <div class="form-group"  style="margin-top: 30px">
+                    <input type="text" class="form-control"  placeholder="用户名" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" id="pwd" name="pwd">
+					<div style="margin-top: 10px;float:right">
+						<select style="border: none;background-color: #E0E0E0" id="profession">
+							<option value="1">管理</option>
+							<option value="2">教师</option>
+							<option value="3">学生</option>
+						</select>
+					</div>
+				
+                </div>
+				<div style="margin-top: 45px;">
+					<button type="button" id="submit" class="btn btn-primary block full-width m-b">登 录</button>
+				</div>
+                <p class="text-muted text-center" style="float:right"> 
+					<a href="login.html#"><small>忘记密码了2？</small></a>
+                </p>
+                <p class="text-muted text-left" style="float:left">
+                    <a href="login.html#"><small>注册</small></a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="html/js/jquery.min.js?v=2.1.4"></script>
+    <script src="html/js/bootstrap.min.js?v=3.3.5"></script>
+    <script type="text/javascript">
+
+    	//绑定事件
+    	$(function(){
+    		//登陆
+    		$("#submit").click(function(){
+//    			var cardno = $("#cardno").val();
+//    			var pwd = $("#pwd").val();
+//    			var profession = $("#profession").val();
+//    			var data = {cardno:cardno,pwd:pwd,profession:profession}
+//    			var url = domain+"/system/login";
+//                alert(domain);
+//                $.post(url,data,function(data){
+//                    alert(data.code);
+//                    if(data.code=="1"){
+//                        switch(profession){
+//                            case "1":window.location.href="html/root.html";
+//                        }
+//                    }
+//                });
+
+                var name = $("#name").val();
+                var pwd = $("#pwd").val();
+                var profession = $("#profession").val();
+                var data = {name:name,pwd:pwd}
+                var url = domain+"/system/login";
+                alert(domain);
+                $.post(url,data,function(data){
+                    alert(data.code);
+                    if(data.code=="1"){
+                        switch(profession){
+                            case "1":window.location.href="html/root.html";
+                        }
+                    }
+                });
+
+
+
+//                $.ajax({
+//                    url: domain+"/system/login",
+//                    type: 'POST',
+//                    data: {
+//                        name: $('#username').val(),
+//                        pwd:  $('#password').val()
+//                    },
+//                    beforeSend: function() {
+//
+//                    },
+//                    success: function(data){
+//                        alert(data.code);
+//                        if(data.code=="1"){
+//                            switch(profession){
+//                                case "1":window.location.href="html/root.html";
+//                            }
+//                        }
+//
+//
+////                        if (json.code == 1) {
+////                            location.href = json.data;
+////                        } else {
+////                            alert(json.data);
+////                            if (10101 == json.code) {
+////                                $('#username').focus();
+////                            }
+////                            if (10102 == json.code) {
+////                                $('#password').focus();
+////                            }
+////                        }
+//                    },
+//                    error: function(error){
+//                        console.log(error);
+//                    }
+//                });
+
+
+            });
+
+    	});
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>

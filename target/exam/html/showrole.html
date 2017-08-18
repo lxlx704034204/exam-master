@@ -1,0 +1,167 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title></title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row"style="border-bottom-width:1px;border-bottom-style:solid">
+			<div class="col-sm-3"style="float:left">
+                 <div class="input-group" style="margin-bottom:5px">
+                    <button type="button" class="btn btn-sm btn-primary" id="add"> 添加成员</button>  
+                 	<button type="button" class="btn btn-sm btn-primary" style="margin-left: 15px"> 批量删除</button> 
+                </div>
+            </div>
+         </div>
+        <div class="row">
+			<div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 align="center" id="title">用户列表</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>编号</th>
+                                    <th>姓名</th>
+									<th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="body">
+                               <!--  <tr>  
+                                	<td>
+                                      <input type="checkbox" checked class="i-checks" name="input[]">
+                                     </td>
+                                    <td>110910040</td>
+                                    <td>呵呵</td>
+									<td>2011.1.1</td>
+                                    <td><a href="#">删除</a></td>
+                                </tr> -->
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    	<div class="ibg"id="div">
+			<div class="idiv" id="iDiv">
+				<div class="ifont">添加成员</div>
+				<input style="margin:6px auto;width:86%" type="text" placeholder="请输入编号" class="input-sm form-control"id="cardno">
+				<input style="margin:6px auto;width:86%" type="text" placeholder="请输入姓名" class="input-sm form-control"id="name">
+				<input style="margin:6px auto;width:86%" type="text" placeholder="请输入问题用于找回密码" class="input-sm form-control"id="question"> 
+				<input style="margin:6px auto;width:86%" type="text" placeholder="请输入问题答案" class="input-sm form-control"id="answer">
+				<div style="margin-left: 20px">
+				<input type="radio" value="男" name="sex">男
+				<input type="radio" value="女" name="sex" style="margin-left: 15px">女
+				</div>
+				<div class="input-group" style="margin:15px auto;">
+					<button type="button" class="btn btn-sm btn-primary"id="addrole"> 确定</button> 							
+					<button  style="margin-left:30px" type="button" class="btn btn-sm btn-primary"id="qx"> 取消</button> 
+				 </div>
+			</div>
+	</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.5"></script>
+ 	<script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- <script src="js/demo/peity-demo.min.js"></script> -->
+	<script>
+		var flag = getQueryString("flag");
+		$(document).ready(function() {
+			switch(flag){
+				case "1":$("#title").text("管理员列表"); break;
+				case "2":$("#title").text("教师列表"); break;
+				case "3":$("#title").text("学生列表"); break;
+			}
+			showPage(1);
+			$(".i-checks").iCheck({
+				checkboxClass : "icheckbox_square-green",
+				radioClass : "iradio_square-green",
+			});
+			$("#add").click(function(){
+				$("#div").show();
+			});
+			$("#qx").click(function(){
+				$("#div").hide();
+			});
+			$("#addrole").click(function(){
+				var cardno = $("#cardno").val();
+				var name = $("#name").val();
+				var profession = flag;
+				var question = $("#question").val();
+				var answer = $("#answer").val();
+				var sex = $("input[name='sex']:checked").val();
+				var parm={cardno:cardno,name:name,profession:profession,
+						  question:question,answer:answer,sex:sex};
+				var url = domain+"user/insertUser";
+				$.post(url,parm,function(data){
+					if(data.code=="1"){
+						$("#div").hide();
+						location.reload();	
+					}
+					
+				});
+			});
+		});
+		function showPage(page){
+			var parm ={profession:flag,page:page};
+			var url = domain +"user/queryUser";
+			$.post(url,parm,function(data){
+				var htmls=[];
+				for(var i in data.data){
+					var html ='<tr><td><input type="checkbox"class="i-checks" name=""></td>'
+	              			 +    '<td>'+data.data[i].cardno+'</td>' 
+							 +	  '<td>'+data.data[i].name+'</td>'
+	              			 +    '<td>'+data.data[i].jointime.split(" ")[0]+'</td>'
+							 +    '<td><a data-id='+data.data[i].id+' href="javascript:void(0)" onclick="del(this)">删除</a></td> </tr>'
+	         		htmls.push(html);
+				}
+				$("#body").append(htmls.join());
+			});
+		}
+		function del(obj){
+			if(confirm("确定删除？")){
+				var id = $(obj).attr("data-id");
+				var parm={id:id};
+				var url=domain +"user/removeUser";
+				 $.post(url,parm,function(data){
+					if(data.code=="1"){
+						$(obj).parent().parent().remove();
+					}
+				});
+			}
+			
+		}
+		function getQueryString(name) {  
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+		    var r = location.search.substr(1).match(reg);  
+		    if (r != null) return unescape(decodeURI(r[2])); return null;  
+		} 
+	</script>
+	<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>

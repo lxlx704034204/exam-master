@@ -1,0 +1,94 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>H+ 后台主题UI框架 - 基础表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    	<div class="row"style="border-bottom-width:1px;border-bottom-style:solid">
+            <div class="col-sm-4"style="float:right;margin-bottom:5px">
+                <div class="input-group">
+                		<span style="margin-bottom: 3px;float: right;">
+                   		 选择日期 <input type="date"style="height:30px;width: 120px;margin-top: 3px">
+                   		 	  ~<input type="date"style="height:30px;width: 120px;margin-top: 3px"> 
+                   		 </span>
+						<span class="input-group-btn">
+                            <button type="button" class="btn btn-sm btn-primary"> 搜索</button>
+						</span>
+                </div>
+            </div>
+         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="table-responsive" style="margin-top:15px">
+                            <table class="table table-striped" >
+                                <thead style="font-weight: bolder;">
+                                    <tr>
+                                      <td >科目</td>
+                                        <td >考试日期</td>
+                                        <td >成绩</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>管理员</td>
+                                        <td>
+											<a target="_self" href="showrole.html?flag=1" style="margin-left:7px">查看</a>
+                                        </td>
+                                        <td>
+											<a target="_self" href="showrole.html?flag=1" style="margin-left:7px">查看</a>
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <!-- <script src="js/bootstrap.min.js?v=3.3.5"></script> -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- <script src="js/demo/peity-demo.min.js"></script> -->
+    <script>
+        $(document).ready(function(){
+			$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",
+			radioClass:"iradio_square-green"
+			});
+			$("#add").click(function(){
+				$("#div").show();
+			});
+			$("#qx").click(function(){
+				$("#div").hide();
+			});
+		});
+		
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>
